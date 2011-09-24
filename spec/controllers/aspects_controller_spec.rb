@@ -169,7 +169,7 @@ describe AspectsController do
     describe 'performance', :performance => true do
       before do
         require 'benchmark'
-        8.times do |n|
+        100.times do |n|
           user = Factory.create(:user)
           aspect = user.aspects.create(:name => 'people')
           connect_users(alice, @alices_aspect_1, user, aspect)
@@ -180,9 +180,9 @@ describe AspectsController do
         end
       end
       it 'takes time' do
-        Benchmark.realtime {
-          get :index
-        }.should < 1.5
+        Benchmark.bm  do |x|
+          x.report{ 200.times { get :index } }
+        end
       end
     end
   end

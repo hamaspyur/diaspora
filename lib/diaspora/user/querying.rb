@@ -13,7 +13,45 @@ module Diaspora
         post ||= Post.where(key => id, :public => true).where(opts).first
       end
 
-      def visible_posts(opts = {})
+      def visible_posts(opts={})
+        defaults = {
+          :type => ['StatusMessage', 'Photo'],
+          :order => 'updated_at DESC',
+          :limit => 15,
+          :hidden => false
+        }
+        opts[:max_time] = opts[:max_time].is_a?(Integer) ? Time.at(opts[:max_time]) : Time.now + 1
+
+        opts = defaults.merge(opts)
+        order_field = opts[:order].split.first.to_sym
+
+        p = Post.
+          joins("LEFT OUTER JOIN post_visibilities ON post_visibilities.post_id = posts.id").
+          joins("LEFT OUTER JOIN contacts ON contacts.id = post_visibilities.contact_id").
+          joins("JOIN aspect_memberships ON aspect_memberships.contact_id = contacts.id").
+          where(Post.arel_table[order_field].lt(opts[:max_time])).
+          where(Post.arel_table[:type].in(opts[:type])).
+          where(Post.arel_table[:pending].eq(false)).
+          where(PostVisibility.arel_table[:hidden].eq(opts[:hidden])).
+          select("DISTINCT posts.*").
+          order("posts.#{opts[:order]}").
+          limit(opts[:limit])
+
+        if opts[:by_members_of]
+          p = p.where(Post.arel_table[:author_id].eq(self.person.id).or(
+            AspectMembership.arel_table[:aspect_id].in(opts[:by_members_of])
+          ))
+        else
+          p = p.where(Post.arel_table[:author_id].eq(self.person.id).or(
+            Contact.arel_table[:user_id].eq(self.id)
+          ))
+        end
+
+        p
+      end
+
+=begin
+      def dvisible_posts(opts = {})
         defaults = {
           :type => ['StatusMessage', 'Photo'],
           :order => 'updated_at DESC',
@@ -53,6 +91,7 @@ module Diaspora
 
         Post.where(:id => post_ids).select('DISTINCT posts.*').limit(opts[:limit]).order(order_with_table)
       end
+=end
 
       def contact_for(person)
         return nil unless person

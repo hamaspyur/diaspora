@@ -103,7 +103,7 @@ describe User do
       end
       it 'works' do # The set up takes a looong time, so to save time we do several tests in one
         bob.visible_posts.length.should == 15 #it returns 15 by default
-        bob.visible_posts.should == bob.visible_posts(:by_members_of => bob.aspects.map { |a| a.id }) # it is the same when joining through aspects
+        bob.visible_posts.map(&:id).should == bob.visible_posts(:by_members_of => bob.aspects.map { |a| a.id }).map(&:id) # it is the same when joining through aspects
         bob.visible_posts.sort_by { |p| p.updated_at }.map { |p| p.id }.should == bob.visible_posts.map { |p| p.id }.reverse #it is sorted updated_at desc by default
 
         # It should respect the order option
@@ -113,16 +113,21 @@ describe User do
         # It should respect the order option
         opts = {:order => 'updated_at DESC'}
         bob.visible_posts(opts).first.updated_at.should > bob.visible_posts(opts).last.updated_at
-        
+
         # It should respect the limit option
         opts = {:limit => 40}
+        pp bob.visible_posts.length
         bob.visible_posts(opts).length.should == 40
-        bob.visible_posts(opts).should == bob.visible_posts(opts.merge(:by_members_of => bob.aspects.map { |a| a.id }))
+        bob.visible_posts(opts).map(&:id).should == bob.visible_posts(opts.merge(:by_members_of => bob.aspects.map { |a| a.id })).map(&:id)
         bob.visible_posts(opts).sort_by { |p| p.updated_at }.map { |p| p.id }.should == bob.visible_posts(opts).map { |p| p.id }.reverse
 
         # It should paginate using a datetime timestamp
         last_time_of_last_page = bob.visible_posts.last.updated_at
         opts = {:max_time => last_time_of_last_page}
+
+        pp last_time_of_last_page
+        pp bob.visible_posts.length
+
         bob.visible_posts(opts).length.should == 15
         bob.visible_posts(opts).map { |p| p.id }.should == bob.visible_posts(opts.merge(:by_members_of => bob.aspects.map { |a| a.id })).map { |p| p.id }
         bob.visible_posts(opts).sort_by { |p| p.updated_at }.map { |p| p.id }.should == bob.visible_posts(opts).map { |p| p.id }.reverse
