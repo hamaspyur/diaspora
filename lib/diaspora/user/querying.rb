@@ -31,11 +31,13 @@ module Diaspora
           joins("LEFT OUTER JOIN post_visibilities ON post_visibilities.post_id = posts.id").
           joins("LEFT OUTER JOIN aspect_visibilities ON aspect_visibilities.post_id = posts.id").
           joins("LEFT OUTER JOIN contacts ON contacts.id = post_visibilities.contact_id").
-          joins("JOIN aspect_memberships ON aspect_memberships.contact_id = contacts.id").
+          joins("LEFT OUTER JOIN aspect_memberships ON aspect_memberships.contact_id = contacts.id").
           where(Post.arel_table[order_field].lt(opts[:max_time])).
           where(Post.arel_table[:type].in(opts[:type])).
           where(Post.arel_table[:pending].eq(false)).
-          where(PostVisibility.arel_table[:hidden].eq(opts[:hidden])).
+          where(PostVisibility.arel_table[:hidden].eq(opts[:hidden]).or(
+            AspectVisibility.arel_table[:aspect_id].in(opts[:by_members_of])
+          )).
           select("DISTINCT posts.*").
           order("posts.#{opts[:order]}").
           limit(opts[:limit])
