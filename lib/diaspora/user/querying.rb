@@ -20,7 +20,9 @@ module Diaspora
           :limit => 15,
           :hidden => false
         }
-        opts[:max_time] = opts[:max_time].is_a?(Integer) ? Time.at(opts[:max_time]) : Time.now + 1
+
+        opts[:max_time] ||= Time.now + 1
+        opts[:max_time] = Time.at(opts[:max_time].to_i)
 
         opts = defaults.merge(opts)
         order_field = opts[:order].split.first.to_sym

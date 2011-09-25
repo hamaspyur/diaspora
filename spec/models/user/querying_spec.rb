@@ -108,11 +108,11 @@ describe User do
 
         # It should respect the order option
         opts = {:order => 'created_at DESC'}
-        bob.visible_posts(opts).first.created_at.should > bob.visible_posts(opts).last.created_at
+        bob.visible_posts(opts).all.first.created_at.should > bob.visible_posts(opts).all.last.created_at
 
         # It should respect the order option
         opts = {:order => 'updated_at DESC'}
-        bob.visible_posts(opts).first.updated_at.should > bob.visible_posts(opts).last.updated_at
+        bob.visible_posts(opts).all.first.updated_at.should > bob.visible_posts(opts).all.last.updated_at
 
         # It should respect the limit option
         opts = {:limit => 40}
@@ -122,11 +122,8 @@ describe User do
         bob.visible_posts(opts).sort_by { |p| p.updated_at }.map { |p| p.id }.should == bob.visible_posts(opts).map { |p| p.id }.reverse
 
         # It should paginate using a datetime timestamp
-        last_time_of_last_page = bob.visible_posts.last.updated_at
+        last_time_of_last_page = bob.visible_posts.all.last.updated_at
         opts = {:max_time => last_time_of_last_page}
-
-        pp last_time_of_last_page
-        pp bob.visible_posts.length
 
         bob.visible_posts(opts).length.should == 15
         bob.visible_posts(opts).map { |p| p.id }.should == bob.visible_posts(opts.merge(:by_members_of => bob.aspects.map { |a| a.id })).map { |p| p.id }
