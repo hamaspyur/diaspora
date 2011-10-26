@@ -222,7 +222,6 @@ describe 'a user receives a post' do
   end
 
   describe 'comments' do
-
     context 'remote' do
       before do
         connect_users(alice, @alices_aspect, eve, @eves_aspect)
@@ -293,6 +292,20 @@ describe 'a user receives a post' do
         lambda {
           receive_with_zord(alice, bob.person, @xml)
         }.should_not raise_exception
+      end
+    end
+
+    describe 'a remote user comments on a local users post' do
+      before do
+        @env = DiasporaEnviroment.new
+        @env.remote_user_is_connected_to(alice)
+      end
+
+      it 'works' do
+        xml = @env.xml_of_remote_diasporian_commenting_on_local_users_post(alice, Factory(:status_message, :author => alice.person))
+        fantasy_resque do
+          Resque.enqueue(Jobs::ReceiveEncryptedSalmon, alice.id, xml)
+        end
       end
     end
   end

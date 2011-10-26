@@ -52,6 +52,7 @@ end
 disable_typhoeus
 ProcessedImage.enable_processing = false
 
+
 def set_up_friends
   [local_luke, local_leia, remote_raphael]
 end
