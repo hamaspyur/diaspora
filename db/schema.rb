@@ -390,8 +390,6 @@ ActiveRecord::Schema.define(:version => 20111217042006) do
 
   add_index "share_visibilities", ["contact_id"], :name => "index_post_visibilities_on_contact_id"
   add_index "share_visibilities", ["shareable_id", "shareable_type", "contact_id"], :name => "shareable_and_contact_id"
-  add_index "share_visibilities", ["shareable_id", "shareable_type", "hidden", "contact_id"], :name => "shareable_and_hidden_and_contact_id"
-  add_index "share_visibilities", ["shareable_id"], :name => "index_post_visibilities_on_post_id"
 
   create_table "tag_followings", :force => true do |t|
     t.integer  "tag_id",     :null => false
