@@ -74,6 +74,14 @@ describe User do
         alice.hidden_shareables['Post'].should == []
       end
     end
+    
+    describe 'toggle_hidden_shareable' do
+      it 'calls add_hidden_shareable if the key does not exsist' do
+        sm = Factory(:status_message)
+        alice.should_receive(:add_hidden_shareable).with(sm)
+        alice.toggle_hidden_shareable(sm)
+      end
+    end
 
 
     describe '#infer_email_from_invitation_provider' do
