@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
   validates_presence_of :person, :unless => proc {|user| user.invitation_token.present?}
   validates_associated :person
   validate :no_person_with_same_username
+  
+  serialize :hidden_shareables, Hash
 
   has_one :person, :foreign_key => :owner_id
   delegate :public_key, :posts, :photos, :owns?, :diaspora_handle, :name, :public_url, :profile, :first_name, :last_name, :to => :person
@@ -98,6 +100,26 @@ class User < ActiveRecord::Base
      self.create_from_invitation!(invitation)
     end
   end
+
+  def add_hidden_shareable(share)
+    key = share.class.base_class.to_s
+    share_id = share.id.to_s
+    if self.hidden_shareables.has_key?(key)
+      self.hidden_shareables[key] << share_id
+    else
+      self.hidden_shareables[key] = [share_id]
+    end
+    self.hidden_shareables
+  end
+
+  def remove_hidden_shareable(share)
+    key = share.class.base_class.to_s
+    share_id = share.id.to_s
+    if self.hidden_shareables.has_key?(key)
+      self.hidden_shareables[key].delete(share_id)
+    end
+  end
+
 
   def self.create_from_invitation!(invitation)
     user = User.new

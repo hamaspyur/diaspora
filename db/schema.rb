@@ -433,11 +433,11 @@ ActiveRecord::Schema.define(:version => 20111217042006) do
   create_table "users", :force => true do |t|
     t.string   "username"
     t.text     "serialized_private_key"
-    t.boolean  "getting_started",                                   :default => true,  :null => false
-    t.boolean  "disable_mail",                                      :default => false, :null => false
+    t.boolean  "getting_started",                                   :default => true,         :null => false
+    t.boolean  "disable_mail",                                      :default => false,        :null => false
     t.string   "language"
-    t.string   "email",                                             :default => "",    :null => false
-    t.string   "encrypted_password",                 :limit => 128, :default => "",    :null => false
+    t.string   "email",                                             :default => "",           :null => false
+    t.string   "encrypted_password",                 :limit => 128, :default => "",           :null => false
     t.string   "invitation_token",                   :limit => 60
     t.datetime "invitation_sent_at"
     t.string   "reset_password_token"

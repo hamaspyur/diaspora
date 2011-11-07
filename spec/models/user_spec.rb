@@ -35,6 +35,47 @@ describe User do
       end
     end
 
+    describe 'hidden_shareables' do
+      it 'is a hash' do
+       alice.hidden_shareables.should == {} 
+      end
+    end
+
+    describe 'add_hidden_shareable' do
+      it 'adds the share id to an array which is keyed by the objects class' do
+        sm = Factory(:status_message)
+        alice.add_hidden_shareable(sm)
+        alice.hidden_shareables['Post'].should == [sm.id.to_s]
+      end
+
+      it 'handles having multiple posts' do
+        sm = Factory(:status_message)
+        sm2 = Factory(:status_message)
+        alice.add_hidden_shareable(sm)
+        alice.add_hidden_shareable(sm2)
+
+        alice.hidden_shareables['Post'].should =~ [sm.id.to_s, sm2.id.to_s]
+      end
+
+      it 'handles having multiple shareable types' do
+        sm = Factory(:status_message)
+        photo = Factory(:photo)
+        alice.add_hidden_shareable(photo)
+
+        alice.hidden_shareables['Photo'].should == [photo.id.to_s]
+      end
+    end
+
+    describe '#remove_hidden_shareable' do
+      it 'removes the id from the hash if it is there'  do
+        sm = Factory(:status_message)
+        alice.add_hidden_shareable(sm)
+        alice.remove_hidden_shareable(sm)
+        alice.hidden_shareables['Post'].should == []
+      end
+    end
+
+
     describe '#infer_email_from_invitation_provider' do
       it 'sets corresponding email if invitation_service is email' do
         addr = '12345@alice.com'
