@@ -121,9 +121,18 @@ class User < ActiveRecord::Base
     key = share.class.base_class.to_s
     if self.hidden_shareables.has_key?(key) && self.hidden_shareables[key].include?(share_id)
       self.remove_hidden_shareable(key, share_id)
+      self.save
+      false
     else
       self.add_hidden_shareable(key, share_id)
+      self.save
+      true
     end
+  end
+
+  def has_hidden_shareables_of_type?(t = Post)
+    share_type = t.base_class.to_s
+    self.hidden_shareables[share_type].present?
   end
 
 

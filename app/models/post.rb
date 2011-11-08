@@ -25,12 +25,16 @@ class Post < ActiveRecord::Base
 
   def self.excluding_blocks(user)
     people = user.blocks.includes(:person).map{|b| b.person}
+    scope = scoped
 
     if people.present?
-      where("posts.author_id NOT IN (?)", people.map { |person| person.id })
-    else
-      scoped
+      scope = scope.where("posts.author_id NOT IN (?)", people.map { |person| person.id })
     end
+
+    if user.has_hidden_shareables_of_type?
+      scope = scope.where('posts.id NOT IN (?)', user.hidden_shareables["#{self.base_class}"])
+    end
+    scope
   end
 
   def self.for_a_stream(max_time, order, user=nil)

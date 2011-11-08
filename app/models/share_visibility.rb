@@ -36,6 +36,12 @@ class ShareVisibility < ActiveRecord::Base
     true
   end
 
+  def serialize_hidden_to_owner
+    return false unless self.hidden?
+    user = self.contact.user
+    user.add_hidden_shareable(self.shareable_type, self.shareable_id)
+  end
+
   private
   def not_public
     if shareable.public?
