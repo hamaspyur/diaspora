@@ -77,15 +77,15 @@ describe User do
       end
       
       describe 'toggle_hidden_shareable' do
-        it 'calls add_hidden_shareable if the key does not exist' do
+        it 'calls add_hidden_shareable if the key does not exist, and returns true' do
           alice.should_receive(:add_hidden_shareable).with(@sm_class, @sm_id)
-          alice.toggle_hidden_shareable(@sm)
+          alice.toggle_hidden_shareable(@sm).should be_true
         end
 
         it 'calls remove_hidden_shareable if the key exists' do
           alice.should_receive(:remove_hidden_shareable).with(@sm_class, @sm_id)
           alice.add_hidden_shareable(@sm_class, @sm_id)
-          alice.toggle_hidden_shareable(@sm)
+          alice.toggle_hidden_shareable(@sm).should be_false
         end
       end
     end
