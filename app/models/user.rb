@@ -101,9 +101,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def add_hidden_shareable(share)
-    key = share.class.base_class.to_s
-    share_id = share.id.to_s
+  def add_hidden_shareable(key, share_id)
     if self.hidden_shareables.has_key?(key)
       self.hidden_shareables[key] << share_id
     else
@@ -112,11 +110,19 @@ class User < ActiveRecord::Base
     self.hidden_shareables
   end
 
-  def remove_hidden_shareable(share)
-    key = share.class.base_class.to_s
-    share_id = share.id.to_s
+  def remove_hidden_shareable(key, share_id)
     if self.hidden_shareables.has_key?(key)
       self.hidden_shareables[key].delete(share_id)
+    end
+  end
+
+  def toggle_hidden_shareable(share)
+    share_id = share.id.to_s
+    key = share.class.base_class.to_s
+    if self.hidden_shareables.has_key?(key) && self.hidden_shareables[key].include?(share_id)
+      self.remove_hidden_shareable(key, share_id)
+    else
+      self.add_hidden_shareable(key, share_id)
     end
   end
 

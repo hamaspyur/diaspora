@@ -36,50 +36,57 @@ describe User do
     end
 
     describe 'hidden_shareables' do
-      it 'is a hash' do
-       alice.hidden_shareables.should == {} 
+      before do
+        @sm = Factory(:status_message)
+        @sm_id = @sm.id.to_s
+        @sm_class = @sm.class.base_class.to_s
       end
-    end
+        it 'is a hash' do
+         alice.hidden_shareables.should == {} 
+        end
 
-    describe 'add_hidden_shareable' do
-      it 'adds the share id to an array which is keyed by the objects class' do
-        sm = Factory(:status_message)
-        alice.add_hidden_shareable(sm)
-        alice.hidden_shareables['Post'].should == [sm.id.to_s]
+      describe 'add_hidden_shareable' do
+        it 'adds the share id to an array which is keyed by the objects class' do
+          alice.add_hidden_shareable(@sm_class, @sm_id)
+          alice.hidden_shareables['Post'].should == [@sm_id]
+        end
+
+        it 'handles having multiple posts' do
+          sm2 = Factory(:status_message)
+          alice.add_hidden_shareable(@sm_class, @sm_id)
+          alice.add_hidden_shareable(sm2.class.base_class.to_s, sm2.id.to_s)
+
+          alice.hidden_shareables['Post'].should =~ [@sm_id, sm2.id.to_s]
+        end
+
+        it 'handles having multiple shareable types' do
+          photo = Factory(:photo)
+          alice.add_hidden_shareable(photo.class.base_class.to_s, photo.id.to_s)
+          alice.add_hidden_shareable(@sm_class, @sm_id)
+
+          alice.hidden_shareables['Photo'].should == [photo.id.to_s]
+        end
       end
 
-      it 'handles having multiple posts' do
-        sm = Factory(:status_message)
-        sm2 = Factory(:status_message)
-        alice.add_hidden_shareable(sm)
-        alice.add_hidden_shareable(sm2)
-
-        alice.hidden_shareables['Post'].should =~ [sm.id.to_s, sm2.id.to_s]
+      describe '#remove_hidden_shareable' do
+        it 'removes the id from the hash if it is there'  do
+          alice.add_hidden_shareable(@sm_class, @sm_id)
+          alice.remove_hidden_shareable(@sm_class, @sm_id)
+          alice.hidden_shareables['Post'].should == []
+        end
       end
+      
+      describe 'toggle_hidden_shareable' do
+        it 'calls add_hidden_shareable if the key does not exist' do
+          alice.should_receive(:add_hidden_shareable).with(@sm_class, @sm_id)
+          alice.toggle_hidden_shareable(@sm)
+        end
 
-      it 'handles having multiple shareable types' do
-        sm = Factory(:status_message)
-        photo = Factory(:photo)
-        alice.add_hidden_shareable(photo)
-
-        alice.hidden_shareables['Photo'].should == [photo.id.to_s]
-      end
-    end
-
-    describe '#remove_hidden_shareable' do
-      it 'removes the id from the hash if it is there'  do
-        sm = Factory(:status_message)
-        alice.add_hidden_shareable(sm)
-        alice.remove_hidden_shareable(sm)
-        alice.hidden_shareables['Post'].should == []
-      end
-    end
-    
-    describe 'toggle_hidden_shareable' do
-      it 'calls add_hidden_shareable if the key does not exsist' do
-        sm = Factory(:status_message)
-        alice.should_receive(:add_hidden_shareable).with(sm)
-        alice.toggle_hidden_shareable(sm)
+        it 'calls remove_hidden_shareable if the key exists' do
+          alice.should_receive(:remove_hidden_shareable).with(@sm_class, @sm_id)
+          alice.add_hidden_shareable(@sm_class, @sm_id)
+          alice.toggle_hidden_shareable(@sm)
+        end
       end
     end
 
