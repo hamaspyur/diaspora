@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   validates_presence_of :person, :unless => proc {|user| user.invitation_token.present?}
   validates_associated :person
   validate :no_person_with_same_username
-  
+
   serialize :hidden_shareables, Hash
 
   has_one :person, :foreign_key => :owner_id
@@ -83,8 +83,8 @@ class User < ActiveRecord::Base
     else
       existing_user = User.joins(:services).where(:services => {:type => "Services::#{service.titleize}", :uid => identifier}).first
     end
-   
-   if existing_user.nil? 
+
+   if existing_user.nil?
     i = Invitation.where(:service => service, :identifier => identifier).first
     existing_user = i.recipient if i
    end
@@ -98,6 +98,13 @@ class User < ActiveRecord::Base
       existing_user
     else
      self.create_from_invitation!(invitation)
+    end
+  end
+
+  # @param arr [Array<Hash>]
+  def batch_add_hidden_sharable(arr)
+    arr.each do |row|
+      self.hidden_shareable(row["share_visibilities.shareable_type"], row["share_visibilities.id"])
     end
   end
 
