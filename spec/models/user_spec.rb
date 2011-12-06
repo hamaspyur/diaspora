@@ -41,11 +41,23 @@ describe User do
         @sm_id = @sm.id.to_s
         @sm_class = @sm.class.base_class.to_s
       end
-        it 'is a hash' do
-         alice.hidden_shareables.should == {} 
-        end
 
-      describe 'add_hidden_shareable' do
+      it 'is a hash' do
+        alice.hidden_shareables.should == {} 
+      end
+
+      describe '#batch_add_hidden_shareable' do
+        it 'adds rows' do
+          input = [{"shareable_type" => "Post", "id" => 2},
+                   {"shareable_type" => "Post", "id" => 4}]
+
+          alice.should_receive(:add_hidden_shareable).with("Post", 2)
+          alice.should_receive(:add_hidden_shareable).with("Post", 4)
+          alice.batch_add_hidden_shareable(input)
+        end
+      end
+
+      describe '#add_hidden_shareable' do
         it 'adds the share id to an array which is keyed by the objects class' do
           alice.add_hidden_shareable(@sm_class, @sm_id)
           alice.hidden_shareables['Post'].should == [@sm_id]
@@ -75,7 +87,7 @@ describe User do
           alice.hidden_shareables['Post'].should == []
         end
       end
-      
+
       describe 'toggle_hidden_shareable' do
         it 'calls add_hidden_shareable if the key does not exist, and returns true' do
           alice.should_receive(:add_hidden_shareable).with(@sm_class, @sm_id)

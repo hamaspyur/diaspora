@@ -102,18 +102,20 @@ class User < ActiveRecord::Base
   end
 
   # @param arr [Array<Hash>]
-  def batch_add_hidden_sharable(arr)
+  def batch_add_hidden_shareable(arr)
     arr.each do |row|
-      self.hidden_shareable(row["share_visibilities.shareable_type"], row["share_visibilities.id"])
+      self.add_hidden_shareable(row["shareable_type"], row["id"], :batch => true)
     end
+    self.save
   end
 
-  def add_hidden_shareable(key, share_id)
+  def add_hidden_shareable(key, share_id, opts={})
     if self.hidden_shareables.has_key?(key)
       self.hidden_shareables[key] << share_id
     else
       self.hidden_shareables[key] = [share_id]
     end
+    self.save unless opts[:batch]
     self.hidden_shareables
   end
 

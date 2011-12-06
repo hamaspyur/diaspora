@@ -7,12 +7,13 @@ class RemovePublicShareVisibilities < ActiveRecord::Migration
     # Serialize share visibilities associated to public posts
     User.find_in_batches do |users|
       users.each do |user|
-        results = User.joins(:contact).
-                       joins("LEFT OUTER JOIN share_visibilities ON share_visibilities.contact_id = contacts.id").
-                       select("share_visibilities.id, share_visibilities.shareable_type").
-                       select_all
+        results = select_all(User.joins(:contacts).
+                                  joins("LEFT OUTER JOIN share_visibilities ON share_visibilities.contact_id = contacts.id").
+                                  where("share_visibilities.hidden IS TRUE").
+                                  select("share_visibilities.id, share_visibilities.shareable_type, share_visibilities.hidden").
+                                  to_sql)
 
-        User.batch_add_hidden_sharable(results)
+        user.batch_add_hidden_shareable(results)
       end
     end
 
