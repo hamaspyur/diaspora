@@ -1,3 +1,14 @@
+class User
+  # @param arr [Array<Hash>]
+  def batch_add_hidden_shareable(arr)
+    arr.each do |row|
+      self.add_hidden_shareable(row["shareable_type"], row["id"], :batch => true)
+    end
+    self.save
+  end
+end
+
+
 class RemovePublicShareVisibilities < ActiveRecord::Migration
   def self.up
     # Prepare users table
