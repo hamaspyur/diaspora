@@ -11,7 +11,6 @@ gem 'thin', '~> 1.3.1',    :require => false
 # authentication
 
 gem 'devise', '~> 1.3.1'
-gem 'devise_invitable', '0.5.0'
 gem 'jwt'
 gem 'oauth2-provider', '0.0.19'
 

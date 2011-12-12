@@ -110,6 +110,14 @@ ActiveRecord::Schema.define(:version => 20120203220932) do
 
   add_index "conversations", ["author_id"], :name => "conversations_author_id_fk"
 
+  create_table "invitation_codes", :force => true do |t|
+    t.string   "token"
+    t.integer  "user_id"
+    t.integer  "count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "invitations", :force => true do |t|
     t.text     "message"
     t.integer  "sender_id"
