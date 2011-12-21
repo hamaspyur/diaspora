@@ -43,7 +43,7 @@ describe User do
       end
 
       it 'is a hash' do
-        alice.hidden_shareables.should == {} 
+        alice.hidden_shareables.should == {}
       end
 
       describe '#add_hidden_shareable' do
@@ -1057,7 +1057,7 @@ describe User do
       user.should_not_receive(:generate_reset_password_token)
       user.send_reset_password_instructions
     end
-    
+
     it "queues up a job to send the reset password instructions" do
       user = Factory :user
       Resque.should_receive(:enqueue).with(Jobs::ResetPassword, user.id)
@@ -1122,6 +1122,7 @@ describe User do
           current_sign_in_at
           last_sign_in_at
           current_sign_in_ip
+          hidden_shareables
           last_sign_in_ip
           invitation_service
           invitation_identifier
