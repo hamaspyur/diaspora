@@ -52,11 +52,7 @@
 
     / Social Media Icons are by Paul Robert Lloyd @ http://paulrobertlloyd.com/2009/06/social_media_icons
 
-    / bootstrap/blueprint switch
-    - if @aspect == :getting_started || @page == :logged_out
-      = include_stylesheets :bootstrap
-    - else
-      = include_stylesheets :blueprint, :media => 'screen'
+    = stylesheet_link_tag "bootstrap.min.css"
 
     = include_stylesheets :login, :media => 'screen'
 
@@ -66,10 +62,10 @@
 
     :javascript
       // Support for older browsers
-      if(Array.isArray === undefined) {  
-        Array.isArray = function (arg) {  
-          return Object.prototype.toString.call(arg) == '[object Array]';  
-        };  
+      if(Array.isArray === undefined) {
+        Array.isArray = function (arg) {
+          return Object.prototype.toString.call(arg) == '[object Array]';
+        };
       }
       if ((window.history) && (window.history.pushState === undefined)) {
         window.history.pushState = function() { };
@@ -113,38 +109,26 @@
     - if @person
       %link{:rel => "alternate", :href => "#{@person.public_url}.atom", :type => "application/atom+xml", :title => "#{t('.public_feed', :name => @person.name)}"}
 
-  %body{:class => "#{yield(:body_class)}"}
-
+  %body
     - unless @page == :logged_out
       - flash.each do |name, msg|
         %div{:id => "flash_#{name}"}
           .message
             = msg
 
-      #notifications
-
     - unless current_user
       %header
         = render 'layouts/header'
 
-    .container{:style=> "#{yield(:break_the_mold)}"}
-      - if @aspsect == :getting_started || @page == :logged_out
-        = yield
-      - else
-        .span-24.last{:style=> "#{yield(:break_the_mold)}"}
-          = yield
+    #main-nav
+      %h2
+        *
+      =link_to "M", multi_stream_path
+      =link_to "A", aspects_stream_path
+      =link_to "@", mentioned_stream_path
+      =link_to "<", liked_stream_path
+      =link_to "0", commented_stream_path
 
-    - unless @landing_page
-      %a{:id=>"back-to-top", :title=>"#{I18n.t('.back_to_top')}", :href=>"#"}
-        &#8679;
+    .container
+      = yield
 
-    %footer
-      .container
-        %ul#footer_nav
-          %li= link_to '@joindiaspora', "http://twitter.com/joindiaspora"
-          %li= link_to 'github', "https://github.com/diaspora/diaspora"
-          %li= link_to t('layouts.header.blog'), "http://blog.joindiaspora.com"
-          %li= link_to t('layouts.header.code'), "#{root_url.chomp('/')}/source.tar.gz" unless request.url.match(/joindiaspora.com/)
-          %li= link_to t('.whats_new'), 'https://github.com/diaspora/diaspora/wiki/Changelog'
-          %li= link_to(t('layouts.application.toggle'), toggle_mobile_path)  if is_mobile_device?
-        = image_tag 'powered_by_diaspora.png', :height => "11px", :width => "145px"
