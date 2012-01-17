@@ -1,29 +1,26 @@
+  <!--
 <% if(typeof(all_comments_loaded) == 'undefined' || !all_comments_loaded) { %>
-  <ul class="show_comments <%= comments_count <= 3 ? 'hidden' : '' %>">
-    <li>
-      <a href="/posts/<%= id %>/comments" class="toggle_post_comments">
+  <div class="show_comments <%= comments_count <= 3 ? 'hidden' : '' %>">
+    <a href="/posts/<%= id %>/comments" class="toggle_post_comments">
       <%= Diaspora.I18n.t('stream.more_comments', {count : comments_count - 3}) %>
-      </a>
-    </li>
-  </ul>
+    </a>
+  </div>
 <% } %>
+  -->
 
-<ul class="comments"> </ul>
+<div class="comments"> </div>
 
 <% if(current_user) { %>
-  <div class="new_comment_form_wrapper <%= comments_count > 0 ? '' : 'hidden' %>">
+  <div class="new_comment_form_wrapper hidden">
     <form accept-charset="UTF-8" action="/posts/<%= id %>/comments" class="new_comment" id="new_comment_on_<%= id %>" method="post">
-      <a href="/people/<%= current_user.id %>">
-        <img src="<%= current_user.avatar.small %>" class="avatar" data-person-id="<%= current_user.id %>"/>
-      </a>
+      <fieldset>
+        <a href="/people/<%= current_user.id %>">
+          <img src="<%= current_user.avatar.small %>" class="avatar"/>
+        </a>
 
-      <p>
-      <label for="comment_text_on_<%= id %>"><%= Diaspora.I18n.t('stream.comment') %></label>
-        <textarea class="comment_box" id="comment_text_on_<%= id %>" name="text" rows="2" />
-      </p>
-      <div class="submit_button">
-        <input class="button creation" id="comment_submit_<%= id %>" name="commit" type="submit" value="<%= Diaspora.I18n.t('stream.comment') %>" />
-      </div>
+        <textarea class="comment_box" id="comment_text_on_<%= id %>" name="text" rows="1" prefill="<%= Diaspora.I18n.t('stream.comment') %>"/>
+        <input class="btn" id="comment_submit_<%= id %>" name="commit" type="submit" value="<%= Diaspora.I18n.t('stream.comment') %>" />
+      </fieldset>
     </form>
   </div>
 <% } %>

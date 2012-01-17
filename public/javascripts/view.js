@@ -4,9 +4,6 @@
 */
 var View = {
   initialize: function() {
-    /* Buttons */
-    $("input:submit").addClass("button");
-
     /* In field labels */
     $("label").inFieldLabels();
     $(document).bind('afterReveal.facebox', function() {

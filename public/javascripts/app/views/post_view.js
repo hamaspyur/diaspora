@@ -10,7 +10,15 @@ app.views.Post = app.views.StreamObject.extend({
     "click .shield a": "removeNsfwShield",
     "click .remove_post": "destroyModel",
     "click .hide_post": "hidePost",
-    "click .block_user": "blockUser"
+    "click .block_user": "blockUser",
+    "click .content": "slide",
+    "click .comment": "slide"
+  },
+
+  slide : function(evt) {
+    evt.preventDefault();
+    $(".stream:last-child").toggleClass('over')
+    $(evt.target).closest(".stream_element").toggleClass("selected")
   },
 
   subviews : {
@@ -20,7 +28,7 @@ app.views.Post = app.views.StreamObject.extend({
     ".post-content" : "postContentView"
   },
 
-  tooltipSelector : ".delete, .block_user, .post_scope",
+  tooltipSelector : ".delete, .block_user, .post_scope, .post-author.avatar",
 
   initialize : function() {
     $(this.el).attr("id", this.model.get("guid"));
@@ -40,6 +48,10 @@ app.views.Post = app.views.StreamObject.extend({
   feedbackView : function(){
     if(!window.app.user()) { return null }
     return new  app.views.Feedback({model : this.model});
+  },
+
+  resharedContent : function(){
+    return this.model.get('root')
   },
 
   postContentView: function(){

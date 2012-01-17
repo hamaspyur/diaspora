@@ -3,62 +3,24 @@
 -#   the COPYRIGHT file.
 
 
-- content_for :head do
-  = include_javascripts :home
+.row
+  - content_for :head do
+    = include_javascripts :home
 
-- if current_user.getting_started?
-  #welcome-to-diaspora
-    .container{:style => "position: relative;"}
-      .right
-        = link_to image_tag('close_label.png'), getting_started_completed_path, :id => "gs-skip-x"
-      .span-23
-        %h1
-          = t('aspects.index.welcome_to_diaspora', :name => current_user.first_name)
-        %h3
-          = t('aspects.index.introduce_yourself')
-  %br
-  %br
-  %br
-  %br
-  %br
+  - if current_user.getting_started?
+    #welcome-to-diaspora
+      .container{:style => "position: relative;"}
+        .right
+          = link_to image_tag('close_label.png'), getting_started_completed_path, :id => "gs-skip-x"
+        .span-23
+          %h1
+            = t('aspects.index.welcome_to_diaspora', :name => current_user.first_name)
+          %h3
+            = t('aspects.index.introduce_yourself')
+    %br
+    %br
+    %br
+    %br
+    %br
 
-.span-5.leftNavBar
-  #home_user_badge
-    = owner_image_link
-    %h4
-      = link_to current_user.first_name, local_or_remote_person_path(current_user.person)
-
-  .section
-    %ul.left_nav
-      %li
-        = link_to t("streams.multi.title"), multi_stream_path, :class => 'home_selector', :rel => 'backbone'
-
-    = render 'aspects/aspect_listings', :stream => @stream
-
-    %ul.left_nav
-      %li
-        = link_to t('streams.mentions.title'), mentioned_stream_path, :class => 'home_selector', :rel => 'backbone'
-
-    %ul.left_nav
-      %li
-        = link_to t('streams.comment_stream.title'), commented_stream_path, :class => 'home_selector', :rel => 'backbone'
-
-    %ul.left_nav
-      %li
-        = link_to t('streams.like_stream.title'), liked_stream_path, :class => 'home_selector', :rel => 'backbone'
-
-    #followed_tags_listing
-      = render 'tags/followed_tags_listings'
-
-.span-13.append-1
-  #aspect_stream_container.stream_container
-    = render 'aspects/aspect_stream', :stream => @stream
-
-.span-5.rightBar.last
-  #selected_aspect_contacts.section
-    .title.no_icon
-      %h5.stream_title
-        = @stream.title
-    .content
-
-  = render 'shared/right_sections'
+  = render 'aspects/aspect_stream', :stream => @stream
