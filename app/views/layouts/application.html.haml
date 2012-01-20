@@ -50,11 +50,7 @@
                            fade-in 0.2s ease-in;
       }
 
-    / Social Media Icons are by Paul Robert Lloyd @ http://paulrobertlloyd.com/2009/06/social_media_icons
-
-    / bootstrap/blueprint switch
     = stylesheet_link_tag "bootstrap.min.css"
-
     = stylesheet_link_tag "login", :media => 'screen'
 
     = include_stylesheets :default, :media => 'all'
@@ -118,15 +114,6 @@
         = render 'layouts/header'
 
     = render 'layouts/templates'
-
-    #main-nav
-      %h2
-        *
-      =link_to "M", multi_stream_path
-      =link_to "A", aspects_stream_path
-      =link_to "@", mentioned_stream_path
-      =link_to "<", liked_stream_path
-      =link_to "0", commented_stream_path
 
     .container
       = yield

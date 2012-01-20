@@ -60,25 +60,9 @@
     </div>
   </div>
 
-  <div id="hovercard_container">
-    <div id="hovercard">
-      <img class="avatar">
-      <h4>
-        <a class="person"></a>
-      </h4>
-      <p class="handle"></p>
-      <div id="hovercard_dropdown_container"></div>
-      <div class="hovercard_footer">
-        <div class="footer_container">
-          <div class="hashtags"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <ul class="dropdown" id="user_menu">
     <li>
-    <div class="right">
+    <div style="float:right">
       ▼
     </div>
     <img alt="<%= current_user.name %>" class="avatar" data-person_id="<%= current_user.id %>" src="<%= current_user.avatar.small %>" title="<%= current_user.name %>" />

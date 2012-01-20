@@ -84,6 +84,8 @@ javascripts:
 stylesheets:
   default:
     - public/stylesheets/app2.css
+    - public/stylesheets/header.css
+
     - public/stylesheets/lightbox.css
     - public/stylesheets/autocomplete.css
     - public/stylesheets/tags.css
