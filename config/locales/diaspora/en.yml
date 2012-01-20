@@ -792,12 +792,16 @@ en:
       control_your_audience: "Control your Audience"
       new_user_welcome_message: "Use #hashtags to classify your posts and find people who share your interests.  Call out awesome people with @Mentions"
       visibility_dropdown: "Use this dropdown to change visibility of your post.  (We suggest you make this first one public.)"
-      title: "Set up connected services"
-      share: "Share"
+      title: "Connected services"
       outside: "Public messages will be available for others outside of Diaspora to see."
+<<<<<<< HEAD
       logged_in: "logged in to %{service}"
       manage: "manage connected services"
       atom_feed: "Atom feed"
+=======
+      logged_in: "Logged in to %{service}"
+      manage: "Manage connected services"
+>>>>>>> touched up publisher / tag show page; converted another modal; removed facebox
     notification:
       new: "New %{type} from %{from}"
     contact_list:

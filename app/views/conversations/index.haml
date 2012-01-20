@@ -9,14 +9,11 @@
 - content_for :page_title do
   = t('.message_inbox')
 
-:css
-  footer{ display:none;}
-
 #left_pane
   #left_pane_header
     %h3
       .right
-        = link_to t('.new_message'), new_conversation_path, :class => 'button', :rel => 'facebox'
+        = link_to t('.new_message'), new_conversation_path, :class => 'btn', :rel => 'facebox'
       = t('.inbox')
 
   #conversation_inbox
@@ -34,13 +31,11 @@
       = will_paginate @conversations
 
 
-.span-15.prepend-9.last
-  .stream_container
-    #conversation_show
-      - if @conversation
-        = render 'conversations/show', :conversation => @conversation
-      - else
-        #no_conversation_text
-          = t('.no_conversation_selected')
-        #no_conversation_controls
-          = link_to t('.create_a_new_message'), new_conversation_path, :rel => 'facebox'
+#conversation_show
+  - if @conversation
+    = render 'conversations/show', :conversation => @conversation
+  - else
+    #no_conversation_text
+      = t('.no_conversation_selected')
+    #no_conversation_controls
+      = link_to t('.create_a_new_message'), new_conversation_path, :rel => 'facebox'

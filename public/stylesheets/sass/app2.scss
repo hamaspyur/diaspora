@@ -34,6 +34,12 @@ body {
     max-width: 100%;
   }
 
+  .avatar {
+    height: 40px;
+    width: 40px;
+    box-shadow: 0 -1px 0px rgba(0,0,0,0.2);
+  }
+
   p {
     margin-bottom: 2px;
   }
@@ -98,17 +104,7 @@ body {
 }
 
 .avatar {
-  height: 40px;
-  width: 40px;
   border-radius: 5px;
-  box-shadow: 0 -1px 0px rgba(0,0,0,0.2);
-
-  &.big {
-    height: 100px;
-    width: 100px;
-    border-radius: 50px;
-    box-shadow: 0 -3px 0px rgba(0,0,0,0.6), 0 3px 0px rgba(155,155,155,0.6), -3px 0px 0px rgba(155,155,155,0.4), 3px 0px 0px rgba(155,155,155,0.4);
-  }
 }
 
 .hidden {
@@ -187,11 +183,5 @@ body {
       display: none;
     }
   }
-}
-
-#loading-more-content {
-  position: absolute;
-  bottom: 0;
-  height: 20px;
 }
 

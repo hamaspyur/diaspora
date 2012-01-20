@@ -6,6 +6,5 @@ var dropdown = $("ul.dropdown_list[data-person_id=<%= @person.id %>]")
 $('.newItem', dropdown).before("<%= escape_javascript( aspect_dropdown_list_item(@aspect, @contact.aspects.include?(@aspect))) %>");
 
 ContactEdit.updateNumber(dropdown, "<%= @person.id %>", <%= @contact.aspects.size %>);
-$.facebox.close();
 $('#profile .dropdown').toggleClass("active");
 

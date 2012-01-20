@@ -39,10 +39,12 @@ javascripts:
     - public/javascripts/vendor/jquery.placeholder.js
     - public/javascripts/vendor/timeago.js
     - public/javascripts/vendor/facebox.js
+    
     - public/javascripts/vendor/underscore.js
     - public/javascripts/vendor/jquery.events.input.js
     - public/javascripts/vendor/jquery.elastic.js
     - public/javascripts/vendor/jquery.mentionsInput.js
+
     - public/javascripts/jquery.infinitescroll-custom.js
     - public/javascripts/jquery.autocomplete-custom.js
     - public/javascripts/keycodes.js
@@ -109,7 +111,6 @@ stylesheets:
     - public/stylesheets/autocomplete.css
     - public/stylesheets/mentions.css
     - public/stylesheets/tags.css
-    - public/stylesheets/vendor/facebox.css
     - public/stylesheets/vendor/fileuploader.css
     - public/stylesheets/vendor/autoSuggest.css
   rtl:
