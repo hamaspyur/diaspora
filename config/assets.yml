@@ -60,8 +60,7 @@ javascripts:
     - public/javascripts/aspect-sorting.js
     - public/javascripts/mentions.js
 
-    - public/javascripts/vendor/bootstrap/bootstrap-twipsy.js
-    - public/javascripts/vendor/bootstrap/bootstrap-popover.js
+    - public/javascripts/vendor/bootstrap/*
 
   login:
     - public/javascripts/login.js
