@@ -2,20 +2,15 @@
 -#   licensed under the Affero General Public License version 3 or later.  See
 -#   the COPYRIGHT file.
 
-- content_for :head do
-  :css
-    body { margin-top: 220px; }
-
-#grey_header
+.container{:style => 'text-align:center;'}
   .row
-    %h3
+    %h4
       = t('.signed_out')
 
     %h1
       = t('.go_mobile')
 
-.container{:style => 'text-align:center;'}
-  .row.mobile_row
+  .row
     = image_tag 'diaspora_mobile_screens.png', :width => 480, :height => 300
 
   .row
@@ -25,5 +20,5 @@
         = link_to AppConfig[:pod_url], multi_stream_path
       = t('.on_your_mobile_device')
 
-    %p.dull
+    %p
       = t('.works_on_modern')
