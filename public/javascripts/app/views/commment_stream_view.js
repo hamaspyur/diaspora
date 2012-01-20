@@ -7,6 +7,7 @@ app.views.CommentStream = app.views.Base.extend({
   events: {
     "submit form": "createComment",
     "focus .comment_box": "commentTextareaFocused",
+    "keyup .comment_box": "checkForComment",
     "click .toggle_post_comments": "expandComments"
   },
 
@@ -29,6 +30,18 @@ app.views.CommentStream = app.views.Base.extend({
     })
   },
 
+  checkForComment: function(evt) {
+    if(this.$(".comment_box").val()) {
+      this.$(".comment_submit").removeAttr('disabled');
+    } else {
+      this.disableCommentSubmit();
+    }
+  },
+
+  disableCommentSubmit: function(){
+    this.$(".comment_submit").attr('disabled', 'true');
+  },
+
   createComment: function(evt) {
     if(evt){ evt.preventDefault(); }
 
@@ -37,6 +50,7 @@ app.views.CommentStream = app.views.Base.extend({
     });
 
     this.$(".comment_box").val("")
+    this.disableCommentSubmit(evt);
     return this;
   },
 

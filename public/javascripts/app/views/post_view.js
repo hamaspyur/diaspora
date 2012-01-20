@@ -10,14 +10,6 @@ app.views.Post = app.views.StreamObject.extend({
     "click .remove_post": "destroyModel",
     "click .hide_post": "hidePost",
     "click .block_user": "blockUser",
-    "click .content": "slide",
-    "click .comment": "slide"
-  },
-
-  slide : function(evt) {
-    evt.preventDefault();
-    $(".stream:last-child").toggleClass('over')
-    $(evt.target).closest(".stream_element").toggleClass("selected")
   },
 
   subviews : {
