@@ -104,6 +104,8 @@ stylesheets:
     - public/stylesheets/login.css
   default:
     - public/stylesheets/app2.css
+    - public/stylesheets/header.css
+
     - public/stylesheets/lightbox.css
     - public/stylesheets/autocomplete.css
     - public/stylesheets/mentions.css

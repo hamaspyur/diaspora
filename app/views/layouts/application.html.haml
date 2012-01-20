@@ -50,11 +50,8 @@
                            fade-in 0.2s ease-in;
       }
 
-    / Social Media Icons are by Paul Robert Lloyd @ http://paulrobertlloyd.com/2009/06/social_media_icons
-
     = stylesheet_link_tag "bootstrap.min.css"
-
-    = include_stylesheets :login, :media => 'screen'
+    = stylesheet_link_tag "login", :media => 'screen'
 
     = include_stylesheets :default, :media => 'all'
     - if rtl?
