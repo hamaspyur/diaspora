@@ -26,24 +26,27 @@ body {
   border: 1px solid #999;
 }
 
-.stream_element {
-  -webkit-transition: opacity 0.3s ease;
+
+.stream_element, .content-area {
   position: relative;
-
-  object {
-    min-width: 100%;
-  }
-
   border: 1px solid #bbb;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #aaa;
 
   border-radius: 5px;
-  padding: 10px;
-  margin: 10px 0;
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   background-color: #fff;
-  cursor: pointer;
+}
+
+.stream_element {
+  -webkit-transition: opacity 0.3s ease;
+
+  object {
+    min-width: 100%;
+  }
+
+  padding: 10px;
+  margin: 10px 0;
 
   img {
     max-width: 100%;

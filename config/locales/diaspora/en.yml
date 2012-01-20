@@ -956,7 +956,7 @@ en:
       getting_started: 'New User Prefrences'
       following: "Following Settings"
       auto_follow_back: "Automatically follow back if someone follows you"
-      auto_follow_aspect: "Aspect for automatically followed users:"
+      auto_follow_aspect: "Aspect for automatically followed users"
 
       close_account:
         dont_go: "Hey, please don't go!"

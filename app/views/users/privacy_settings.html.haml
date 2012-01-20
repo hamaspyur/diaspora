@@ -5,19 +5,19 @@
 - content_for :page_title do
   = t('.title')
 
-#section_header
-  %h2
-    = t('privacy')
-  = render 'shared/settings_nav'
+.row
+  .span12.offset2.content-area
+    %h1
+      = t('settings')
+    = render 'shared/settings_nav'
 
-.span-12.prepend-5.last
-  %h3
-    = t('.ignored_users')
+    %h3
+      = t('.ignored_users')
 
-  - @blocks.each do |block|
-    = block.person.name
-    \-
-    = link_to t('.stop_ignoring'), block_path(block),
-      :method => :delete
-    %br
+    - @blocks.each do |block|
+      = block.person.name
+      \-
+      = link_to t('.stop_ignoring'), block_path(block),
+        :method => :delete
+      %br
 
