@@ -1,13 +1,9 @@
 <div class="right controls">
   <% if(author.id != (!!current_user && current_user.id)) { %>
-    <a href="#" rel=nofollow>
-      <img src="/images/icons/ignoreuser.png" alt="Ignoreuser" class="block_user control_icon" title= "<%= Diaspora.I18n.t('ignore') %>" />
-      <img src="/images/deletelabel.png" class="delete control_icon hide_post" title="<%= Diaspora.I18n.t('stream.hide') %>" />
-    </a>
+    <!-- <img src="/images/icons/ignoreuser.png" alt="Ignoreuser" class="block_user control_icon" title= "<%= Diaspora.I18n.t('ignore') %>" /> -->
+    <img src="/images/black-close-icon.png" class="delete control_icon hide_post" title="<%= Diaspora.I18n.t('stream.hide') %>" />
   <% } else { %>
-    <a href="#" rel=nofollow>
-      <img src="/images/deletelabel.png" class="delete control_icon remove_post" title="<%= Diaspora.I18n.t('delete') %>" />
-    </a>
+    <img src="/images/black-close-icon.png" class="delete control_icon remove_post" title="<%= Diaspora.I18n.t('delete') %>" />
   <% } %>
 
 </div>
@@ -33,7 +29,17 @@
     </div>
   <% } %>
 
+  <div class="post-stats">
+    <time class="timeago" datetime="<%= created_at %>"/>
+
+    <span class="post-reactions">
+      <img src="/images/icons/pencil_mobile_grey.png" class="reaction-icon" />
+      <img src="/images/icons/reshare_mobile.png" class="reaction-icon" />
+      <img src="/images/icons/heart_mobile_grey.png" class="reaction-icon" />
+    </span>
+  </div>
+
   <div class="feeddback"> </div>
-  <div class="likes"> </div>
+  <!-- <div class="likes"> </div> -->
   <div class="comments"> </div>
 
