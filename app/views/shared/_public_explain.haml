@@ -2,22 +2,21 @@
 -#   licensed under the Affero General Public License version 3 or later.  See
 -#   the COPYRIGHT file.
 
-.span-12.last
-  .modal_title_bar
-    %h4=t('.title')
+.modal-header
+  = link_to "x", "#", :class => "close"
+  %h3
+    = t('.title')
+
+.modal-body
   %p
-    =t('.outside')
-    %br
-    %br
-    = link_to "RSS", "#{current_user.public_url}.atom"
-    %br
+    = t('.outside')
+  %ul
+    %li
+      = link_to "RSS", "#{current_user.public_url}.atom"
     - if current_user.services
       - for service in current_user.services
-        = t('.logged_in', :service => service.provider)
-        %br
+        %li
+          = t('.logged_in', :service => service.provider)
 
-    = link_to t('.manage'), services_path
-
-    %br
-    %br
-    = link_to t('ok'), '#', :class => "button", :onClick => '$.facebox.close();'
+.modal-footer
+  = link_to t('.manage'), services_path, :class => 'btn primary'

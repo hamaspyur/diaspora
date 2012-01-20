@@ -6,9 +6,6 @@ var View = {
   initialize: function() {
     /* In field labels */
     $("label").inFieldLabels();
-    $(document).bind('afterReveal.facebox', function() {
-      jQuery("#facebox label").inFieldLabels();
-    });
 
     /* "Toggling" the search input */
     $(this.search.selector)
@@ -44,22 +41,9 @@ var View = {
 
     $(document.body).click(this.dropdowns.removeFocus);
 
-    /* facebox */
-    $.facebox.settings.closeImage = '/images/facebox/closelabel.png';
-    $.facebox.settings.loadingImage = '/images/facebox/loading.gif';
-    $.facebox.settings.opacity = 0.75;
-
-    $('a[rel*=facebox]').facebox();
-    $(document).bind('reveal.facebox', function() {
-      Diaspora.page.directionDetector.updateBinds();
-    });
-
     $("a.new_aspect").click(function(e){
       $("input#aspect_name").focus()
     });
-
-    /* facebox 'done' buttons */
-    $("*[rel*=close]").live('click', function(){ $.facebox.close(); });
 
     /* notification routing */
     $("#notification").delegate('.hard_object_link', 'click', function(evt){

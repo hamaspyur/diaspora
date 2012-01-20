@@ -30,7 +30,6 @@ javascripts:
     - public/javascripts/vendor/jquery.charcount.js
     - public/javascripts/vendor/jquery.expander.js
     - public/javascripts/vendor/timeago.js
-    - public/javascripts/vendor/facebox.js
     - public/javascripts/jquery.infinitescroll-custom.js
     - public/javascripts/jquery.autocomplete-custom.js
     - public/javascripts/jquery.infieldlabel-custom.js
@@ -88,7 +87,6 @@ stylesheets:
     - public/stylesheets/lightbox.css
     - public/stylesheets/autocomplete.css
     - public/stylesheets/tags.css
-    - public/stylesheets/vendor/facebox.css
     - public/stylesheets/vendor/fileuploader.css
     - public/stylesheets/vendor/autoSuggest.css
   rtl:

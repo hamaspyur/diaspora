@@ -28,7 +28,7 @@ var List = {
           if( $('.searchable').length == 1){
               $('.searchable .contact[data-contact_id='+contact_id+']').fadeOut(200);
           } else if($('#aspects_list').length == 1) {
-            $.facebox.close();
+            //$.facebox.close();
           };
         }
     });

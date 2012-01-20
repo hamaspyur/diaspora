@@ -42,10 +42,10 @@
             - if current_user.services
               - for service in current_user.services
                 = image_tag "social_media_logos/#{service.provider}-16x16.png", :title => service.provider.titleize, :class => "service_icon dim", :id =>"#{service.provider}", :maxchar => "#{service.class::MAX_CHARACTERS}"
-            = link_to (image_tag "icons/monotone_wrench_settings.png"), "#question_mark_pane", :class => 'question_mark', :rel => 'facebox', :title => t('shared.public_explain.manage')
+            = link_to (image_tag "icons/monotone_wrench_settings.png"), "#", :title => t('shared.public_explain.manage'), 'data-controls-modal' => 'connected-services-pane', 'data-backdrop' => "static"
 
           .dropdown{ ! current_user.getting_started? ? {:class => "hang_right"} : { :class => "hang_right", :title => popover_with_close_html("2. #{t('shared.public_explain.control_your_audience')}"), 'data-content'=> t('shared.public_explain.visibility_dropdown')} }
-            .button.toggle.publisher
+            .btn.toggle.publisher
               - if publisher_public
                 = t('public')
               - elsif all_aspects_selected?(selected_aspects)
@@ -67,14 +67,12 @@
                 - for aspect in all_aspects
                   = aspect_dropdown_list_item(aspect, !all_aspects_selected?(selected_aspects) && selected_aspects.include?(aspect) )
 
-          = status.submit t('.share'), :disabled => publisher_hidden_text.blank?, :class => 'button creation', :tabindex => 2
+          = status.submit t('.share'), :disabled => publisher_hidden_text.blank?, :class => 'btn primary', :tabindex => 2
 
-          .facebox_content
-            #question_mark_pane
-              = render 'shared/public_explain'
     = link_to '', contacts_path(:aspect_ids => aspect_ids), :class => 'selected_contacts_link hidden'
-
 
     #publisher_photo_upload
       = render 'photos/new_photo', :aspect_ids => aspect_ids.join(',')
 
+#connected-services-pane.modal.hide.fade
+  = render 'shared/public_explain'
