@@ -11,16 +11,14 @@
 <div class="comments"> </div>
 
 <% if(current_user) { %>
-  <div class="new_comment_form_wrapper hidden">
-    <form accept-charset="UTF-8" action="/posts/<%= id %>/comments" class="new_comment" id="new_comment_on_<%= id %>" method="post">
-      <fieldset>
-        <a href="/people/<%= current_user.id %>">
-          <img src="<%= current_user.avatar.small %>" class="avatar"/>
-        </a>
+  <form accept-charset="UTF-8" action="/posts/<%= id %>/comments" class="new_comment" id="new_comment_on_<%= id %>" method="post">
+    <fieldset>
+      <a href="/people/<%= current_user.id %>">
+        <img src="<%= current_user.avatar.small %>" class="avatar"/>
+      </a>
 
-        <textarea class="comment_box" id="comment_text_on_<%= id %>" name="text" rows="1" prefill="<%= Diaspora.I18n.t('stream.comment') %>"/>
-        <input class="btn" id="comment_submit_<%= id %>" name="commit" type="submit" value="<%= Diaspora.I18n.t('stream.comment') %>" />
-      </fieldset>
-    </form>
-  </div>
+      <textarea class="comment_box" id="comment_text_on_<%= id %>" name="text" rows="1" prefill="<%= Diaspora.I18n.t('stream.comment') %>"/>
+      <input class="btn comment_submit" disabled='true' id="comment_submit_<%= id %>" name="commit" type="submit" value="<%= Diaspora.I18n.t('stream.comment') %>" />
+    </fieldset>
+  </form>
 <% } %>
