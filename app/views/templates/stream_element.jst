@@ -5,12 +5,15 @@
   <% } else { %>
     <img src="/images/black-close-icon.png" class="delete control_icon remove_post" title="<%= Diaspora.I18n.t('delete') %>" />
   <% } %>
-
 </div>
 
 <a href="/people/<%= author.id %>">
   <img src="<%= author.avatar.small %>" class="post-author avatar" title="<%= author.name %>"/>
 </a>
+
+<% if(!public) { %>
+  <img src="/images/icons/padlock-closed.png" class="post-scope" />
+<% } %>
 
 <div class="content">
   <% if(text !== null && text.match(/#nsfw/i)) { %>
