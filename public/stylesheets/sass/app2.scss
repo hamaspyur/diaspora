@@ -57,6 +57,14 @@ body {
     top: 0;
   }
 
+  .post-scope {
+    height: 18px;
+    width: 18px;
+    position: absolute;
+    top: 48px;
+    left: -39px;
+  }
+
   .post-stats{
 
     padding: 5px 0;
@@ -151,13 +159,12 @@ body {
     }
 
     padding: 10px;
+    padding-left: 60px;
 
     .avatar {
-      height: 30px;
-      width: 30px;
       position: absolute;
-      left: -40px;
-      top: 0;
+      left: 10px;
+      top: 10px;
     }
 
     .from {
