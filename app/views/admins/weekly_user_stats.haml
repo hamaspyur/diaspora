@@ -1,13 +1,11 @@
+.row
+  .span12.offset2.content-area
+    = render :partial => 'admins/admin_bar.haml'
 
-.span-24
-  = render :partial => 'admins/admin_bar.haml'
-%br
-%br
-
-.span-24.last
-  %h1
-    = "Users per week (Current server date is: #{Time.now.to_date}) "
-  %ul
-    - @created_users_by_week.keys.sort.each do |k|
-      %li
-        = "Week stating on #{k} , #{@created_users_by_week[k]}"
+    .clearfix
+      %h2
+        = "Users per week (Current server date is: #{Time.now.to_date}) "
+      %ul
+        - @created_users_by_week.keys.sort.each do |k|
+          %li
+            = "Week stating on #{k} , #{@created_users_by_week[k]}"

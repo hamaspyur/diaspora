@@ -20,7 +20,7 @@ app.views.CommentStream = app.views.Base.extend({
     this.model.comments.each(this.appendComment, this);
 
     // add autoexpanders to new comment textarea
-    this.$("textarea").autoResize({'extraSpace' : 10});
+    this.$("textarea").autoResize({'extraSpace' : 0});
   },
 
   presenter: function(){

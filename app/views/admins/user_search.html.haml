@@ -1,65 +1,74 @@
+.row
+  .span12.offset2.content-area
+    = render :partial => 'admins/admin_bar.haml'
 
-.span-24
-  = render :partial => 'admins/admin_bar.haml'
-%br
-%br
+    .clearfix
+      = form_tag 'admin_inviter', :method => :get do
+        %fieldset
+          %legend
+            Email to invite
 
-%h3
-  = form_tag 'admin_inviter', :method => :get do
-    email to invite:
-    = text_field_tag 'identifier'
-    = submit_tag 'invite'
+          .clearfix
+            .input
+              = text_field_tag 'identifier'
 
+          .actions
+            = submit_tag 'Invite', :class => 'btn info'
 
+      = form_tag 'user_search', :method => :get do
+        %fieldset
+          %legend
+            User Search
 
-%h3
-  user search
-= form_tag 'user_search', :method => :get do
-  username:
-  = text_field_tag 'user[username]', params[:user][:username]
+          .clearfix
+            = label_tag "Username"
+            .input
+              = text_field_tag 'user[username]', params[:user][:username]
 
-  email:
-  = text_field_tag 'user[email]', params[:user][:email]
+          .clearfix
+            = label_tag "Email"
+            .input
+              = text_field_tag 'user[email]', params[:user][:email]
 
-  invitation identifier
-  = text_field_tag 'user[invitation_identifier]', params[:user][:invitation_identifier]
+          .clearfix
+            = label_tag "Invitation Identifier"
+            .input
+              = text_field_tag 'user[invitation_identifier]', params[:user][:invitation_identifier]
 
-  invitation token:
-  = text_field_tag 'user[invitation_token]', params[:user][:invitation_token]
-  = submit_tag 'go'
+          .clearfix
+            = label_tag "Invitation Token"
+            .input
+              = text_field_tag 'user[invitation_token]', params[:user][:invitation_token]
 
+          .actions
+            = submit_tag 'Search', :class => "btn info"
 
-= "#{@users.count} users found"
-%br
-%br
-= for user in @users
-  = user.inspect
-  %br
-  - if user.person
-    = user.person.inspect
-    %br
-    - if user.person.profile
-      = user.person.profile.inspect
-    %br
-  = "invite token: #{accept_invitation_url(user, :invitation_token => user.invitation_token)}" if user.invitation_token
-  %br
-  %br
-  %br
-%br
-= javascript_include_tag 'apiconsole'
-#query
-  %h3 api console
-  = text_field_tag :api
-  = submit_tag 'ping this api', :id => 'api_submit'
+      %pre
+        - if @users.count > 0
+          %h6
+            = "#{@users.count} user(s) found:"
 
-  response:
-  %br
-  %br
-  #resp
+          = for user in @users
+            = user.inspect
+            %br
+            - if user.person
+              = user.person.inspect
+              %br
+              - if user.person.profile
+                = user.person.profile.inspect
+              %br
+            = "invite token: #{accept_invitation_url(user, :invitation_token => user.invitation_token)}" if user.invitation_token
 
+      = javascript_include_tag 'apiconsole'
+      .clearfix
+        %h3
+          API Console
+        = text_field_tag :api
+        = submit_tag 'Ping API', :id => 'api_submit', :class => 'btn info'
 
-%br
-  post to Diaspora v1
-
-
+      .clearfix
+        %br
+        %pre#resp
+          %h6
+            Response:
 
