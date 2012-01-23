@@ -33,6 +33,7 @@ group :production do # we don't install these on travis to speed up test runs
   gem 'rack-google-analytics', :require => 'rack/google-analytics'
   gem 'rack-piwik', :require => 'rack/piwik'
   gem 'rack-ssl', :require => 'rack/ssl'
+  gem 'rack-rewrite', '~> 1.2.1', :require => false
 end
 
 # configuration
