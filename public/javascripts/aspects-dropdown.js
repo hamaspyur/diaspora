@@ -4,7 +4,7 @@
 
 var AspectsDropdown = {
   updateNumber: function(dropdown, personId, number, inAspectClass){
-    var button = dropdown.parents(".dropdown").children('.button.toggle'),
+    var button = dropdown.parents(".dropdown").children('.btn.toggle'),
         selectedAspects = dropdown.children(".selected").length,
         allAspects = dropdown.children().length,
         replacement;

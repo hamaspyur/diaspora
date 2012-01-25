@@ -95,7 +95,7 @@ class AspectsController < ApplicationController
     else
       @aspect_ids = [@aspect.id]
       @aspect_contacts_count = @aspect.contacts.size
-      render :layout => false
+      #render :layout => false
     end
   end
 

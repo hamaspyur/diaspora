@@ -121,7 +121,7 @@ en:
       no_contacts: "You don't have any contacts here yet."
       manage_your_aspects: "Manage your aspects."
     new:
-      name: "Name (only visible to you)"
+      name: "Name"
       create: "Create"
     create:
       success: "Your new aspect %{name} was created"
