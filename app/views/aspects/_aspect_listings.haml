@@ -19,4 +19,32 @@
               = aspect
 
         %li
-          = link_to t('.add_an_aspect'), new_aspect_path, :class => "new_aspect", :rel => "facebox"
+          = link_to t('.add_an_aspect'), new_aspect_path, :class => "new_aspect", 'data-controls-modal' => 'new-aspect-pane', 'data-backdrop' => "static"
+
+
+#new-aspect-pane.modal.fade
+  .modal-header
+    = link_to "x", "#", :class => "close"
+    %h3
+      = t('contacts.index.add_a_new_aspect')
+
+  = form_for(Aspect.new, :remote => @remote) do |aspect|
+    = aspect.error_messages
+    %fieldset
+      .modal-body
+        - if @person_id
+          = aspect.hidden_field :person_id, :value => @person_id
+        .clearfix
+          = aspect.label :name , t('aspects.new.name')
+          .input
+            = aspect.text_field :name, :maxlength => 20
+            %span.help-block
+              Name will not be visible to others
+
+        .clearfix
+          = aspect.label :contacts_visible, t('aspects.edit.make_aspect_list_visible')
+          .input
+            = aspect.check_box :contacts_visible, :default => true
+
+      .modal-footer
+        = aspect.submit t('.create'), :class => 'btn primary'
