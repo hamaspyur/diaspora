@@ -1,35 +1,12 @@
-<span class="post_scope">
-  {{#if public}}
-    {{t "stream.public"}}
-  {{else}}
-    {{t "stream.limited"}}
-  {{/if}}
-
-  {{#if provider_display_name}}
-    <strong>
-      via {{provider_display_name}}
-    </strong>
-  {{/if}}
-</span>
-–
-
-<a href="#" class="like_action" rel='nofollow'>
-  {{#if user_like}}
-    {{t "stream.unlike"}}
-  {{else}}
-    {{t "stream.like"}}
-  {{/if}}
-</a>
-·
 
 {{#if userCanReshare}}
-  <a href="#" class="reshare_action" rel='nofollow'>
-    {{t "stream.reshare"}}
-  </a>
-  ·
+  <img src="/images/icons/reshare_mobile.png" class="reaction-icon reshare_action" />
 {{/if}}
 
-<a href="#" class="focus_comment_textarea" rel="nofollow">
-  {{t "stream.comment"}}
-</a>
+<img src="/images/icons/pencil_mobile_grey.png" class="reaction-icon focus_comment_textarea" />
 
+{{#if user_like}}
+  <img src="/images/icons/heart_mobile_red.png" class="reaction-icon like_action" />
+{{else}}
+  <img src="/images/icons/heart_mobile_grey.png" class="reaction-icon like_action" />
+{{/if}}

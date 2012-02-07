@@ -19,7 +19,7 @@ app.views.Post = app.views.StreamObject.extend({
     ".post-content" : "postContentView"
   },
 
-  tooltipSelector : ".delete, .block_user, .post_scope, .post-author.avatar",
+  tooltipSelector : ".delete, .block_user, .post_scope, .avatar",
 
   initialize : function() {
     $(this.el).attr("id", this.model.get("guid"));
@@ -103,7 +103,7 @@ app.views.Post = app.views.StreamObject.extend({
 
   focusCommentTextarea: function(evt){
     evt.preventDefault();
-    this.$(".new_comment_form_wrapper").removeClass("hidden");
+    this.$("form.new_comment").removeClass("hidden");
     this.$(".comment_box").focus();
 
     return this;

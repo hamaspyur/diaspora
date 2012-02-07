@@ -11,7 +11,7 @@
 <div class="comments"> </div>
 
 {{#if current_user}}
-  <form accept-charset="UTF-8" action="/posts/{{id}}/comments" class="new_comment" id="new_comment_on_{{id}}" method="post">
+  <form accept-charset="UTF-8" action="/posts/{{id}}/comments" class="new_comment {{#unless commentsPresent}} hidden {{/unless}}" id="new_comment_on_{{id}}" method="post">
     <fieldset>
       <textarea class="comment_box" id="comment_text_on_{{id}}" name="text" rows="1" prefill="{{t "stream.comment"}}" />
       <input class="btn comment_submit" disabled='true' id="comment_submit_{{id}}" name="commit" type="submit" value="{{t "stream.comment"}}" />

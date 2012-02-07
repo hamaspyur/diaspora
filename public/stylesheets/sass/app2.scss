@@ -59,7 +59,6 @@ body {
   }
 
   .post-stats{
-
     padding: 5px 0;
     padding-top: 10px;
 
@@ -68,10 +67,16 @@ body {
       color: #999;
     }
 
-    .post-reactions {
+    .feedback {
       cursor: default;
       float: right;
+
+      /* disable user selection */
+      -moz-user-select: none;
+      -webkit-user-select: none;
+
       .reaction-icon {
+        cursor: pointer;
         height: 18px;
         width: 18px;
         margin-left: 8px;
@@ -131,7 +136,6 @@ body {
     border-bottom: 1px solid #ccc;
 
     &:last-child {
-      border-radius: 0 0 5px 5px;
       margin-bottom: -10px;
       border-bottom: none;
     }
@@ -189,3 +193,45 @@ body {
   padding: 20px;
   text-align: center;
 }
+
+#left-arrow,
+#right-arrow {
+
+  font-size: 30px;
+  font-weight: bold;
+  color: #999;
+
+  -webkit-transition: all 0.2s;
+
+  /* flexbox, por favor */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+ 
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  
+  display: box;
+  box-orient: horizontal;
+  box-pack: center;
+  box-align: center;
+
+  position:fixed;
+  top: 0;
+  height: 100%;
+  width: 75px;
+  text-align: center;
+  background: rgba(0,0,0,0.0);
+
+  &:hover {
+    background: rgba(0,0,0,0.3);
+    text-decoration: none;
+    color: #666;
+  }
+}
+
+#left-arrow { left: 0; }
+#right-arrow { right: 0; }

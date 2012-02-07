@@ -33,6 +33,18 @@ var app = {
       $(".stream_title").text(link.text())
       app.router.navigate(link.attr("href").substring(1) ,true)
     })
+
+
+    // keybindings
+    $(document).bind("keydown", function(evt){
+      if( !document.location.pathname.match(/stream|participate/) ) { return }
+      if(evt.keyCode == KEYCODES.RIGHT) {
+        console.log(app.router.navigate("stream", true))
+      } else if(evt.keyCode == KEYCODES.LEFT) {
+        app.router.navigate("participate", true)
+      }
+    })
+
   }
 };
 

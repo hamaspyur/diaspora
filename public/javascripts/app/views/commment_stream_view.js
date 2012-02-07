@@ -11,6 +11,7 @@ app.views.CommentStream = app.views.Base.extend({
     "click .toggle_post_comments": "expandComments"
   },
 
+
   initialize: function(options) {
     this.model.comments.bind('add', this.appendComment, this);
   },
@@ -26,7 +27,8 @@ app.views.CommentStream = app.views.Base.extend({
   presenter: function(){
     return _.extend(this.defaultPresenter(), {
       moreCommentsCount : (this.model.get("comments_count") - 3),
-      showExpandCommentsLink : (this.model.get("comments_count") > 3)
+      showExpandCommentsLink : (this.model.get("comments_count") > 3),
+      commentsPresent : this.commentsPresent()
     })
   },
 
@@ -40,6 +42,10 @@ app.views.CommentStream = app.views.Base.extend({
 
   disableCommentSubmit: function(){
     this.$(".comment_submit").attr('disabled', 'true');
+  },
+
+  commentsPresent : function() {
+    return this.model.get("comments_count") > 0;
   },
 
   createComment: function(evt) {

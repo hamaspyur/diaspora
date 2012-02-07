@@ -3,30 +3,13 @@
   {{#if root}}
 
     {{#with root}}
-      <a href="/people/{{author.guid}}">
-        <img src="{{author.avatar.small}}" class="avatar" />
-      </a>
+      {{#with author}}
+        <a href="/people/{{guid}}">
+          <img src="{{avatar.small}}" class="avatar" title="{{name}}"/>
+        </a>
+      {{/with}}
 
       <div class="content">
-        <div class="post_initial_info">
-          <span class="from">
-            <a href="/people/{{author.guid}}">
-              {{author.name}}
-            </a>
-          </span>
-
-          <span class="details">
-            -
-            <a href="/posts/{{id}}">
-              <time class="timeago" datetime="{{created_at}}"/>
-            </a>
-          </span>
-
-          {{#if reshares_count}}
-            -
-            {{t "stream.reshares" count=reshares_count}}
-          {{/if}}
-        </div>
     {{/with}}
 
       {{> status-message}}

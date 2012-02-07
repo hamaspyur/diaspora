@@ -2,6 +2,9 @@
 -#   licensed under the Affero General Public License version 3 or later.  See
 -#   the COPYRIGHT file.
 
+= link_to "<", participate_stream_path, :id => "left-arrow", :rel => "backbone"
+= link_to ">", multi_stream_path, :id => "right-arrow", :rel => "backbone"
+
 .row
   - content_for :head do
     = include_javascripts :home

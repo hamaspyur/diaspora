@@ -18,6 +18,9 @@ javascripts:
     - public/javascripts/vendor/backbone.js
     - public/javascripts/vendor/handlebars-1.0.0.beta.6.js
     - public/javascripts/vendor/markdown/*
+
+    - public/javascripts/vendor/parallax.js
+
     - public/javascripts/app/app.js
     - public/javascripts/app/helpers/*
     - public/javascripts/app/router.js
@@ -39,7 +42,7 @@ javascripts:
     - public/javascripts/vendor/jquery.placeholder.js
     - public/javascripts/vendor/timeago.js
     - public/javascripts/vendor/facebox.js
-    
+
     - public/javascripts/vendor/underscore.js
     - public/javascripts/vendor/jquery.events.input.js
     - public/javascripts/vendor/jquery.elastic.js

@@ -13,7 +13,7 @@
 
 {{#with author}}
   <a href="/people/{{guid}}">
-    <img src="{{avatar.small}}" class="post-author avatar" />
+    <img src="{{avatar.small}}" class="post-author avatar" title="{{name}}" />
   </a>
 {{/with}}
 
@@ -43,14 +43,9 @@
   <div class="post-stats">
     <time class="timeago" datetime="{{created_at}}" />
 
-    <span class="post-reactions">
-      <img src="/images/icons/pencil_mobile_grey.png" class="reaction-icon" />
-      <img src="/images/icons/reshare_mobile.png" class="reaction-icon" />
-      <img src="/images/icons/heart_mobile_grey.png" class="reaction-icon" />
-    </span>
+    <span class="feedback"> </span>
   </div>
 
-  <div class="feedbackk"> </div>
   <!-- <div class="likes"> </div> -->
   <div class="comments"> </div>
 
