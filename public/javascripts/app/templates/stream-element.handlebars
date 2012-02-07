@@ -1,66 +1,57 @@
 <div class="right controls">
   {{#if authorIsCurrentUser}}
     <a href="#" rel=nofollow>
-      <img src="/images/icons/ignoreuser.png" alt="Ignoreuser" class="block_user control_icon" title="{{t "ignore"}}" />
-      <img src="/images/deletelabel.png" class="delete control_icon hide_post" title="{{t "stream.hide"}}" />
+      <!-- <img src="/images/icons/ignoreuser.png" alt="Ignoreuser" class="block_user control_icon" title="{{t "ignore"}}" /> -->
+      <img src="/images/black-close-icon.png" class="delete control_icon hide_post" title="{{t "stream.hide"}}" />
     </a>
   {{else}}
     <a href="#" rel=nofollow>
-      <img src="/images/deletelabel.png" class="delete control_icon remove_post" title="{{t "delete"}}" />
+      <img src="/images/black-close-icon.png" class="delete control_icon remove_post" title="{{t "delete"}}" />
     </a>
   {{/if}}
-
 </div>
 
-<div class="sm_body">
-  {{#with author}}
-    <a href="/people/{{guid}}">
-      <img src="{{avatar.small}}" class="avatar" />
-    </a>
-  {{/with}}
+{{#with author}}
+  <a href="/people/{{guid}}">
+    <img src="{{avatar.small}}" class="post-author avatar" />
+  </a>
+{{/with}}
 
-  <div class="content">
+{{#unless public}}
+  <img src="/images/icons/padlock-closed.png" class="post-scope" />
+{{/unless}}
 
-    <div class="post_initial_info">
-      <span class="from">
-        {{#with author}}
-          <a href="/people/{{guid}}">
-            {{name}}
-          </a>
-        {{/with}}
-      </span>
+<div class="content">
 
-      <span class="details">
-        -
-        <a href="/posts/{{id}}">
-          <time class="timeago" datetime="{{created_at}}" />
+  {{#if nsfw}}
+    <div class="shield_wrapper">
+      <div class="shield">
+        {{t "stream.nsfw"}}
+        <a href="#">
+          {{t "stream.show"}}
         </a>
-
-        {{#if reshares_count}}
-          -
-          {{t "stream.reshares" count=reshares_count}}
-        {{/if}}
-      </span>
-    </div>
-
-    {{#if nsfw}}
-      <div class="shield_wrapper">
-        <div class="shield">
-          {{t "stream.nsfw"}}
-          <a href="#">
-            {{t "stream.show"}}
-          </a>
-        </div>
-    {{/if}}
-
-    <div class="post-content"> </div>
-
-    {{#if nsfw}}
       </div>
-    {{/if}}
+  {{/if}}
 
-    <div class="feedback"> </div>
-    <div class="likes"> </div>
-    <div class="comments"> </div>
+  <div class="post-content"> </div>
 
+  {{#if nsfw}}
+    </div>
+  {{/if}}
+
+
+  <div class="post-stats">
+    <time class="timeago" datetime="{{created_at}}" />
+
+    <span class="post-reactions">
+      <img src="/images/icons/pencil_mobile_grey.png" class="reaction-icon" />
+      <img src="/images/icons/reshare_mobile.png" class="reaction-icon" />
+      <img src="/images/icons/heart_mobile_grey.png" class="reaction-icon" />
+    </span>
   </div>
+
+  <div class="feedbackk"> </div>
+  <!-- <div class="likes"> </div> -->
+  <div class="comments"> </div>
+
+</div>

@@ -117,15 +117,6 @@
       %header
         = render 'layouts/header'
 
-    #main-nav
-      %h2
-        *
-      =link_to "M", multi_stream_path
-      =link_to "A", aspects_stream_path
-      =link_to "@", mentioned_stream_path
-      =link_to "<", liked_stream_path
-      =link_to "0", commented_stream_path
-
     .container
       = yield
 

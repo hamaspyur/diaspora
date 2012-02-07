@@ -794,14 +794,8 @@ en:
       visibility_dropdown: "Use this dropdown to change visibility of your post.  (We suggest you make this first one public.)"
       title: "Connected services"
       outside: "Public messages will be available for others outside of Diaspora to see."
-<<<<<<< HEAD
-      logged_in: "logged in to %{service}"
-      manage: "manage connected services"
-      atom_feed: "Atom feed"
-=======
       logged_in: "Logged in to %{service}"
       manage: "Manage connected services"
->>>>>>> touched up publisher / tag show page; converted another modal; removed facebox
     notification:
       new: "New %{type} from %{from}"
     contact_list:
