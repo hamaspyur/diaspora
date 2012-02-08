@@ -20,6 +20,13 @@ body {
   background-color: #fff;
 }
 
+/* ====== media ====== */
+.media {margin:10px;}
+.media, .bd {overflow:hidden; _overflow:visible; zoom:1;}
+.media .img {float:left; margin-right: 10px;}
+.media .img img{display:block;}
+.media .imgExt{float:right; margin-left: 10px;}
+
 .stream_element {
   -webkit-transition: opacity 0.3s ease;
 
@@ -27,11 +34,14 @@ body {
     min-width: 100%;
   }
 
-  padding: 10px;
   margin: 10px 0;
 
   img {
     max-width: 100%;
+  }
+
+  .post-content {
+    margin: 10px;
   }
 
   .avatar {
@@ -44,43 +54,39 @@ body {
     margin-bottom: 2px;
   }
 
-  .post-author {
-    position: absolute;
-    left: -50px;
-    top: 0;
+  .author-info-row {
+    .author-link {
+      color: inherit;
+      font-weight: bold;
+    }
   }
 
   .post-scope {
-    height: 18px;
-    width: 18px;
-    position: absolute;
-    top: 48px;
-    left: -39px;
+    height: 13px;
+    width: 13px;
+    vertical-align: middle;
+    margin-left: -2px
   }
 
-  .post-stats{
-    padding: 5px 0;
-    padding-top: 10px;
+  time {
+    font-size: smaller;
+    color: #999;
+  }
 
-    time {
-      font-size: smaller;
-      color: #999;
-    }
+  .feedback {
+    margin: 10px;
+    cursor: default;
+    float: right;
 
-    .feedback {
-      cursor: default;
-      float: right;
+    /* disable user selection */
+    -moz-user-select: none;
+    -webkit-user-select: none;
 
-      /* disable user selection */
-      -moz-user-select: none;
-      -webkit-user-select: none;
-
-      .reaction-icon {
-        cursor: pointer;
-        height: 18px;
-        width: 18px;
-        margin-left: 8px;
-      }
+    .reaction-icon {
+      cursor: pointer;
+      height: 18px;
+      width: 18px;
+      margin-left: 8px;
     }
   }
 
@@ -117,33 +123,21 @@ body {
 }
 
 .comments {
-  margin-left: -5px;
-  margin-right: -5px;
-  position: relative;
 
   .comment {
-    -webkit-transition: background-color 0.2s;
 
     position: relative;
+    -webkit-transition: background-color 0.2s;
 
     &:first-child {
       box-shadow: inset 0 2px 5px -3px #999;
-      margin-top: 7px;
-      border-top: none;
     }
 
     border-top: 1px solid #fafafa;
     border-bottom: 1px solid #ccc;
-
-    &:last-child {
-      margin-bottom: -10px;
-      border-bottom: none;
-    }
-
     background-color: #eee;
-    &:hover{
-      background-color: #fafafa;
 
+    &:hover{
       img.comment_delete {
         opacity: 0.6;
 
@@ -152,31 +146,9 @@ body {
         }
       }
     }
-
-    padding: 10px;
-    padding-left: 60px;
-
-    .avatar {
-      position: absolute;
-      left: 10px;
-      top: 10px;
-    }
-
-    .from {
-      color: inherit;
-      font-weight: bold;
-    }
-
-    time {
-      display: block;
-      font-size: smaller;
-      margin-top: 2px;
-      color: #888;
-    }
   }
 
   .new_comment {
-    margin-bottom: -20px;
     padding: 0 5px;
 
     textarea {

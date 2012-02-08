@@ -12,41 +12,45 @@
 </div>
 
 {{#with author}}
-  <a href="/people/{{guid}}">
-    <img src="{{avatar.small}}" class="post-author avatar" title="{{name}}" />
-  </a>
+  <span class="feedback"> </span>
+  <div class="media author-info-row">
+    <a href="/people/{{guid}}" class="img">
+      <img src="{{avatar.small}}" class="post-author avatar" title="{{name}}" />
+    </a>
+    <div class="bd">
+      <a href="/people/{{guid}}" class="author-link">
+        {{name}}
+      </a>
+      <div>
+        {{#unless public}}
+          <img src="/images/icons/padlock-closed.png" class="post-scope" />
+        {{/unless}}
+
+        <time class="timeago" datetime="{{../created_at}}" />
+
+      </div>
+    </div>
+  </div>
 {{/with}}
 
-{{#unless public}}
-  <img src="/images/icons/padlock-closed.png" class="post-scope" />
-{{/unless}}
 
-<div class="content">
-
-  {{#if nsfw}}
-    <div class="shield_wrapper">
-      <div class="shield">
-        {{t "stream.nsfw"}}
-        <a href="#">
-          {{t "stream.show"}}
-        </a>
-      </div>
-  {{/if}}
-
-  <div class="post-content"> </div>
-
-  {{#if nsfw}}
+{{#if nsfw}}
+  <div class="shield_wrapper">
+    <div class="shield">
+      {{t "stream.nsfw"}}
+      <a href="#">
+        {{t "stream.show"}}
+      </a>
     </div>
-  {{/if}}
+{{/if}}
 
+<div class="post-content"> </div>
 
-  <div class="post-stats">
-    <time class="timeago" datetime="{{created_at}}" />
-
-    <span class="feedback"> </span>
+{{#if nsfw}}
   </div>
+{{/if}}
 
-  <!-- <div class="likes"> </div> -->
-  <div class="comments"> </div>
 
-</div>
+
+<!-- <div class="likes"> </div> -->
+<div class="comments"> </div>

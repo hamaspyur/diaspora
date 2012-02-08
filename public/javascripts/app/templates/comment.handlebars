@@ -4,18 +4,20 @@
   {{/if}}
 </div>
 
-{{#with author}}
-  <a href="/people/{{guid}}">
-    <img src="{{avatar.small}}" class="avatar" title="{{name}}"/>
-  </a>
-{{/with}}
+<div class="media">
+  {{#with author}}
+    <a href="/people/{{guid}}" class="img">
+      <img src="{{avatar.small}}" class="avatar" title="{{name}}" />
+    </a>
+  {{/with}}
 
-<div class="content">
-  <div class="collapsible">
-    {{{text}}}
-  </div>
+  <div class="bd">
+    <div class="collapsible">
+      {{{text}}}
+    </div>
 
-  <div class="comment_info">
-    <time class="timeago" datetime="{{created_at}}"/>
+    <div class="comment_info">
+      <time class="timeago" datetime="{{created_at}}"/>
+    </div>
   </div>
 </div>
