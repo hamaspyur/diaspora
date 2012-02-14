@@ -26,7 +26,6 @@ class PublicsController < ApplicationController
 
 
   layout false
-  caches_page :host_meta
 
   def hcard
     @person = Person.find_by_guid_and_closed_account(params[:guid], false)

@@ -7,9 +7,9 @@ module Jobs
     Dir["#{Rails.root}/app/models/jobs/mail/*.rb"].each {|file| require file }
     
     #TODO these should be subclassed real exceptions
-    DUMB_ERROR_MESSAGES = [
-      "Contact required unless request",
-      "Relayable object, but no parent object found" ]
+    DUMB_ERROR_MESSAGES = []
+      # "Contact required unless request",
+      # "Relayable object, but no parent object found" ]
 
     def self.suppress_annoying_errors(&block)
       begin
