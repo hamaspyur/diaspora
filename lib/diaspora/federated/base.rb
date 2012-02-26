@@ -17,6 +17,8 @@ module Diaspora
       def self.included(model)
         model.instance_eval do
           include ROXML
+          include ActiveModel::Validations
+            
           include Diaspora::Federated::Base::InstanceMethods
         end
       end

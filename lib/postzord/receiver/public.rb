@@ -13,6 +13,12 @@ class Postzord::Receiver::Public < Postzord::Receiver
     FEDERATION_LOGGER.info("Receving public post from person:#{@author.id}")
   end
 
+
+  # def new_receive!
+  #     stub_object = Diaspora::FederationValidator::Public.new(@author, @salmon).validate_object!
+  #     actual_object = stub_object.commit!
+  #     actual_object.receive_public!
+  # end
   # @return [Boolean]
   def verified_signature?
     @salmon.verified_for_key?(@author.public_key)

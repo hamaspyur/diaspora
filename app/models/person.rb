@@ -6,6 +6,7 @@ require 'uri'
 require File.join(Rails.root, 'lib/hcard')
 
 class Person < ActiveRecord::Base
+  #this is special, as every request contains a wrapped person, but we dont federate a person directly
   include ROXML
   include Encryptor::Public
   include Diaspora::Guid
