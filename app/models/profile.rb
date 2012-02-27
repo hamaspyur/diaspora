@@ -41,6 +41,12 @@ class Profile < ActiveRecord::Base
     :image_url_small, :birthday, :gender, :bio, :location, :searchable, :date, :tag_string, :nsfw
 
   belongs_to :person
+
+
+
+  #FEDERATION HAX
+  alias :author :person
+  
   before_validation do
     self.tag_string = self.tag_string.split[0..4].join(' ')
   end
@@ -173,6 +179,8 @@ class Profile < ActiveRecord::Base
     end
   end
 
+  include Diaspora::Federated::Lint # unless Rails.env.production?
+  
   private
   def clearable_fields
     self.attributes.keys - Profile.protected_attributes.to_a - ["created_at", "updated_at", "person_id"]

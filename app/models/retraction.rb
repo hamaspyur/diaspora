@@ -8,8 +8,10 @@ class Retraction
   xml_accessor :post_guid
   xml_accessor :diaspora_handle
   xml_accessor :type
-
   attr_accessor :person, :object, :subscribers
+
+  #FEDERATION HAX
+  alias :author :person
 
   def subscribers(user)
     unless self.type == 'Person'
@@ -61,4 +63,6 @@ class Retraction
     end
     self
   end
+  
+  include Diaspora::Federated::Lint # unless Rails.env.production?
 end

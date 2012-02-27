@@ -18,15 +18,13 @@ describe "attack vectors" do
 
       post_from_non_contact.delete
       bad_user.delete
-      post_count = Post.count
 
       zord = Postzord::Receiver::Private.new(bob, :salmon_xml => salmon_xml)
       expect {
         zord.perform!
-      }.should raise_error /Contact required unless request/
+      }.should_not change(Post, :count)
 
       bob.visible_shareables(Post).include?(post_from_non_contact).should be_false
-      Post.count.should == post_count
     end
   end
 

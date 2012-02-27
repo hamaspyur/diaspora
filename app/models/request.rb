@@ -5,9 +5,16 @@
 
 class Request
   include Diaspora::Federated::Base
-  include ActiveModel::Validations
-
+  
   attr_accessor :sender, :recipient, :aspect
+
+
+
+  #FEDERATION HAX
+  alias :author :sender
+
+
+
 
   xml_accessor :sender_handle
   xml_accessor :recipient_handle
@@ -99,4 +106,6 @@ class Request
       errors[:base] << 'You can not friend yourself'
     end
   end
+  
+  include Diaspora::Federated::Lint # unless Rails.env.production?
 end

@@ -12,6 +12,7 @@ class Diaspora::Federated::Parser
   end
 
   def parse!
+    #we might need a begin rescue here
     self.object = Diaspora::Parser.from_xml(xml)
 
     #crazy munging side effects  :(

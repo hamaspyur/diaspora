@@ -8,8 +8,6 @@ class Diaspora::Federated::Validator::Private
   validate :xml_author_matchs_a_known_party
   validate :model_is_valid?
 
-
-
   def initialize(salmon, user, sender)
     self.salmon = salmon
     self.user = user
@@ -17,24 +15,30 @@ class Diaspora::Federated::Validator::Private
   end
 
   def process!
-    return unless valid_signature_on_envelope? #parsing can be $$$ so do it first
+    return nil unless valid_signature_on_envelope? #parsing can be $$$ so do it first
 
+    #may need to handle case where parse returns nil
     if self.valid?
       object 
     else
+      raise self.errors.inspect
       FEDERATION_LOGGER.info("Failed Private Receive: #{self.errors.inspect}")
       nil
     end
   end
 
   def object
-    @object ||= Diaspora::Federated::Parser.new(salmon.parsed_data, sender)
+    @object ||= Diaspora::Federated::Parser.new(salmon.parsed_data, sender).parse!
   end
 
   private
 
+  #weird
   def valid_signature_on_envelope?
-    sender.present? && self.salmon.verified_for_key?(sender.public_key)
+    unless sender.present? && self.salmon.verified_for_key?(sender.public_key)
+      raise "oh no"
+      errors.add :salmon, "sender failed key check"
+    end
   end
 
   #if the current receiveing user is the owner of the parent post, you know about the commenter, so proceeded
@@ -53,25 +57,29 @@ class Diaspora::Federated::Validator::Private
 
   def relayable_object_has_parent
     if object.respond_to?(:relayable?) && object.parent.nil?
-      errors.add "Relayable Object has no known parent."
+
+      raise "relayable"
+      errors.add :base, "Relayable Object has no known parent."
     end
   end
 
   def contact_required
-    unless object.is_a(Request) || user.contact_for(sender).present?
-      errors.add "Contact Required to receive object."
+    unless object.is_a?(Request) || user.contact_for(sender).present?
+      raise "contact"
+      errors.add :base, "Contact Required to receive object."
     end
   end
 
   def xml_author_matchs_a_known_party
-    unless object.actor.diaspora_handle == known_party
-      errors.add "XML author does not match a known party."
+    unless object.author.diaspora_handle == known_party
+      raise "xml"
+      errors.add :base, "XML author does not match a known party."
     end
   end
 
   def model_is_valid?
-    if object.invalid?
-      errors.add "Invalid Object: #{object.full_error_messages}"
+    unless object.valid?
+      errors.add :base, "Invalid Object: #{object.errors.inspect}"
     end
   end
 end

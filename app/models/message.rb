@@ -3,6 +3,8 @@ class Message < ActiveRecord::Base
   include Diaspora::Federated::Base
   include Diaspora::Guid
   include Diaspora::Relayable
+  include Diaspora::Federated::Lint # unless Rails.env.production?
+
 
   xml_attr :text
   xml_attr :created_at

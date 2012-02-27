@@ -2,6 +2,7 @@ class Conversation < ActiveRecord::Base
   include Diaspora::Federated::Base
   include Diaspora::Guid
 
+
   xml_attr :subject
   xml_attr :created_at
   xml_attr :messages, :as => [Message]
@@ -66,4 +67,6 @@ class Conversation < ActiveRecord::Base
       Notification.notify(user, received_msg, person) if msg.respond_to?(:notification_type)
     end
   end
+
+  include Diaspora::Federated::Lint # unless Rails.env.production?
 end
